@@ -22,8 +22,8 @@ env/
 .DS_Store
 
 # Generated files
-mp3/
-images/
+mp3/*
+images/*
 
 
 # AI model / cache

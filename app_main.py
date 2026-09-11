@@ -1,12 +1,13 @@
 import tkinter as tk
 from tkinter import scrolledtext
+from tkinter import filedialog
 import openai
 from dotenv import load_dotenv
 import os
 import pandas
-from tkinter import filedialog
 import json
 from youtube_audio_download import download_songs_in_csv
+from generate_image import generate_images_for_songs
 
 # ==========================================
 # OpenAI 설정
@@ -39,6 +40,8 @@ CSV형식은 반드시 새로운 줄에서 시작해야 하고, CSV파일의 헤
 형식으로 구성해야 합니다.
 - 플레이리스트 csv 파일을 저장완료 했다면, 저장된 경로에 대한 file_path 를 무조건(must show) 보여주고, 플레이리스트를 mp3파일로 다운로드 할 건지 물어봐야 됩니다.
 - 오류가 발생했다면 파이썬 오류 상세 내역을 답변해야됩니다.
+- after saving the playlist as a CSV file, you must show the CSV file_path and ask the users if they would like to download the MP3 files of the songs in the playlist.
+- after downloading the mp3 files in the playlist, you must ask the users if they would like to generate album cover images for the songs.
             '''
     }
 ]
@@ -65,6 +68,20 @@ functions = [
     {
         'name': 'download_songs_in_csv',
         'description': 'Download mp3 of songs in the recent CSV file.',
+        'parameters': {
+            'type': 'object',
+            'properties': {
+                'csv_file': {
+                    'type': 'string',
+                    'description': 'The recent csv file path',
+                }
+            },
+            'required': ['csv_file'],
+        }
+    },
+    {
+        'name': 'generate_images_for_songs',
+        'description': 'Generate images for the songs in the recent CSV file. This function can be used after dowonload mp3 files.',
         'parameters': {
             'type': 'object',
             'properties': {
@@ -166,6 +183,7 @@ def send_message():
             available_functions = {
                 'save_playlist_as_csv': save_playlist_as_csv,
                 'download_songs_in_csv': download_songs_in_csv,
+                'generate_images_for_songs': generate_images_for_songs,
             }
             function_name = response_message_obj['function_call']['name']
             function_to_call = available_functions[function_name]

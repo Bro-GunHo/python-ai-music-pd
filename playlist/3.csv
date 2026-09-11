@@ -1,4 +1,3 @@
-Title;Artist;Release Date;mp3
-비;폴킴;2016;./mp3/비_폴킴.mp3
-비 오는 날;윤하;2007;./mp3/비_오는_날_윤하.mp3
-비가 온다;정승환;2018;./mp3/비가_온다_정승환.mp3
+;Title;Artist;Release Date;mp3;image
+0;Can't Stop the Feeling!;Justin Timberlake;2016;./mp3/Can't_Stop_the_Feeling!_Justin_Timberlake.mp3;/Users/parkkeon-ho/PythonProject/python-study/images/Can't Stop the Feeling!_Justin Timberlake.png
+1;Walking on Sunshine;Katrina and the Waves;1985;./mp3/Walking_on_Sunshine_Katrina_and_the_Waves.mp3;/Users/parkkeon-ho/PythonProject/python-study/images/Walking on Sunshine_Katrina and the Waves.png

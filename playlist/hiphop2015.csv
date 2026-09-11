@@ -1,6 +1,6 @@
-Title;Artist;Release Date;mp3
-Hotline Bling;Drake;2015;./mp3/Hotline_Bling_Drake.mp3
-Trap Queen;Fetty Wap;2015;./mp3/Trap_Queen_Fetty_Wap.mp3
-See You Again;Wiz Khalifa ft. Charlie Puth;2015;./mp3/See_You_Again_Wiz_Khalifa_ft._Charlie_Puth.mp3
-Jumpman;Drake & Future;2015;./mp3/Jumpman_Drake_&_Future.mp3
-Alright;Kendrick Lamar;2015;./mp3/Alright_Kendrick_Lamar.mp3
+;Title;Artist;Release Date;mp3;image;info_image
+0;Hotline Bling;Drake;2015;./mp3/Hotline_Bling_Drake.mp3;/Users/parkkeon-ho/PythonProject/python-study/images/Hotline Bling_Drake.png;images/Hotline Bling_Drake_album_art.jpg
+1;Trap Queen;Fetty Wap;2015;./mp3/Trap_Queen_Fetty_Wap.mp3;/Users/parkkeon-ho/PythonProject/python-study/images/Trap Queen_Fetty Wap.png;images/Trap Queen_Fetty Wap_album_art.jpg
+2;See You Again;Wiz Khalifa ft. Charlie Puth;2015;./mp3/See_You_Again_Wiz_Khalifa_ft._Charlie_Puth.mp3;/Users/parkkeon-ho/PythonProject/python-study/images/See You Again_Wiz Khalifa ft. Charlie Puth.png;images/See You Again_Wiz Khalifa ft. Charlie Puth_album_art.jpg
+3;Jumpman;Drake & Future;2015;./mp3/Jumpman_Drake_&_Future.mp3;/Users/parkkeon-ho/PythonProject/python-study/images/Jumpman_Drake & Future.png;images/Jumpman_Drake & Future_album_art.jpg
+4;Alright;Kendrick Lamar;2015;./mp3/Alright_Kendrick_Lamar.mp3;/Users/parkkeon-ho/PythonProject/python-study/images/Alright_Kendrick Lamar.png;images/Alright_Kendrick Lamar_album_art.jpg

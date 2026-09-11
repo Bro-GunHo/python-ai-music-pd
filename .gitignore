@@ -24,7 +24,7 @@ env/
 # Generated files
 mp3/*
 images/*
-video/*
+videos/*
 playlist/*
 
 # AI model / cache

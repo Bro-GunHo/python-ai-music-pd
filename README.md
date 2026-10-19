@@ -33,7 +33,7 @@ Python과 생성형 AI를 활용하여 음악 콘텐츠의 기획부터 자료 �
 
 **동영상**
 
-[▶ New York 플레이리스트 동영상 보기](videos/newyork.mp4)
+[▶ New York 플레이리스트 동영상 보기](https://youtu.be/q7gzLYN4uX8)
 
 **플레이리스트 데이터**
 

@@ -8,6 +8,8 @@ import pandas
 import json
 from youtube_audio_download import download_songs_in_csv
 from generate_image import generate_images_for_songs
+from generate_video_using_images import generate_video_using_images
+from generate_video_using_mp4 import generate_video_using_mp4
 
 # ==========================================
 # OpenAI 설정
@@ -33,15 +35,15 @@ message_log = [
         "role": "system", 
         "content": '''
 - 당신은 플레이리스트를 만드는 DJ어시스턴트입니다. 
-- 사용자는 한국인이므로 한국어로 의사소통해야 하지만, 아티스트명과 각 노래의 제목, 아티스트, 발매연도를 목록 형식으로 표시 한 뒤에.
+- 사용자는 한국인이므로 한국어로 의사소통해야 하지만, 아티스트명과 각 노래의 제목(title), 아티스트(artist), 발매연도(release date)를 목록 형식으로 표시 한 뒤에.
 사용자에게 '이 플레이리스트를 CSV로 저장하겠습니까?' 라고 물어보아야 합니다.
-- 저장하려면 세미콜론(;)으로 구분한 CSV 형식의 헤더와 'YYYY' 형식의 발매 연도로 플레이리스트를 보여 주세요. 
-CSV형식은 반드시 새로운 줄에서 시작해야 하고, CSV파일의 헤더는 반드시 영어여야 하며, 'Title; Artist; Release Date' 
-형식으로 구성해야 합니다.
+- 저장하려면 세미콜론(;)으로 구분한 CSV 형식의 헤더와 'YYYY' 형식의 발매 연도로 플레이리스트를 보여 주세요. CSV형식은 반드시 새로운 줄에서 시작해야 하고, CSV파일의 헤더는 반드시 영어여야 하며, 'Title; Artist; Release Date' 형식으로 구성해야 합니다.
 - 플레이리스트 csv 파일을 저장완료 했다면, 저장된 경로에 대한 file_path 를 무조건(must show) 보여주고, 플레이리스트를 mp3파일로 다운로드 할 건지 물어봐야 됩니다.
 - 오류가 발생했다면 파이썬 오류 상세 내역을 답변해야됩니다.
-- after saving the playlist as a CSV file, you must show the CSV file_path and ask the users if they would like to download the MP3 files of the songs in the playlist.
-- after downloading the mp3 files in the playlist, you must ask the users if they would like to generate album cover images for the songs.
+- 플레이리스트를 CSV 파일로 저장한 후, 반드시 CSV 파일의 파일경로(file_path)를 표시하고 사용자에게 플레이리스트에 포함된 곡들의 MP3 파일을 다운로드할 것인지 물어봐야 합니다.
+- 플레이리스트의 MP3 파일을 다운로드한 후, 사용자에게 해당 곡들의 앨범 커버 이미지를 생성할 것인지 물어봐야 합니다. 앨범 커버 이미지는 생성된 이미지를 사용하여 플레이리스트 동영상을 제작하기 위한 필수 조건입니다.
+- 앨범커버 이미지를 제작한 후 생성된 이미지 또는 MP4 동영상 파일을 사용하여 플레이리스트 동영상을 제작할 수 있습니다. 사용자에게 어떤 방식을 선택할 것인지 질문해야 합니다.
+- 동영상 제작이 완료되면 사용자에게 작별 인사를 할 수 있습니다.
             '''
     }
 ]
@@ -92,8 +94,37 @@ functions = [
             },
             'required': ['csv_file'],
         }
+    },
+    {
+        'name': 'generate_video_using_images',
+        'description': 'Generate a playlist video using the created images. This function can be used only after images are created.',
+        'parameters': {
+            'type': 'object',
+            'properties': {
+                'csv_file': {
+                    'type': 'string',
+                    'description': 'The recent csv file path',
+                }
+            },
+            'required': ['csv_file'],
+        }
+    },
+    {
+        'name': 'select_mp4_files_and_generate_video',
+        'description' : 'Generate a playlist video using the video files. This function can be userd only after the mp3 files are downloaded.',
+        'parameters': {
+            'type': 'object',
+            'properties': {
+                'csv_file': {
+                    'type': 'string',
+                    'description': 'The recent csv file path',
+                }
+            },
+            'required': ['csv_file'],
+        }
     }
 ]
+
 
 # ==========================================
 # 메시지 전송
@@ -184,6 +215,8 @@ def send_message():
                 'save_playlist_as_csv': save_playlist_as_csv,
                 'download_songs_in_csv': download_songs_in_csv,
                 'generate_images_for_songs': generate_images_for_songs,
+                'generate_video_using_images': generate_video_using_images,
+                'select_mp4_files_and_generate_video': select_mp4_files_and_generate_video,
             }
             function_name = response_message_obj['function_call']['name']
             function_to_call = available_functions[function_name]
@@ -373,6 +406,19 @@ def save_playlist_as_csv(playlist_csv):
             df = pandas.DataFrame(csv_data[1:], columns=csv_data[0])
             return save_to_csv(df)
     return f'저장에 실패했습니다. \n저장에 실패한 내용은 다음과 같습니다. \n{playlist_csv}', None
+
+
+# ==========================================
+# mp3 다운로드
+# ==========================================
+
+def select_mp4_files_and_generate_video(csv_file):
+    file_paths = filedialog.askopenfilenames(
+        filetypes=[("MP4 files", "*.mp4")],
+        title="Select MP4 files"
+    )
+
+    return generate_video_using_mp4(csv_file, file_paths)
 
 
 # ==========================================

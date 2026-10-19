@@ -1,0 +1,4 @@
+;Title;Artist;Release Date;mp3;image;info_image
+0;Empire State of Mind;Jay-Z ft. Alicia Keys;2009;./mp3/Empire_State_of_Mind_Jay-Z_ft._Alicia_Keys.mp3;/Users/parkkeon-ho/PythonProject/python-study/images/Empire State of Mind_Jay-Z ft. Alicia Keys.png;images/Empire State of Mind_Jay-Z ft. Alicia Keys_album_art.jpg
+1;Welcome to New York;Taylor Swift;2014;./mp3/Welcome_to_New_York_Taylor_Swift.mp3;/Users/parkkeon-ho/PythonProject/python-study/images/Welcome to New York_Taylor Swift.png;images/Welcome to New York_Taylor Swift_album_art.jpg
+2;New York City;The Chainsmokers;2017;./mp3/New_York_City_The_Chainsmokers.mp3;/Users/parkkeon-ho/PythonProject/python-study/images/New York City_The Chainsmokers.png;images/New York City_The Chainsmokers_album_art.jpg

@@ -63,7 +63,7 @@ def merge_videos(video_paths, output_path):
 
     return output_path
 
-def genertate_video_using_images(csv_file):
+def generate_video_using_images(csv_file):
     videos = create_videos_from_playlist_csv(csv_file)
     videos = [video for video in videos if video is not None]  # None 값 제거
 
@@ -76,7 +76,7 @@ def genertate_video_using_images(csv_file):
     return video_file_path
 
 if __name__ == "__main__":
-    genertate_video_using_images('./playlist/hiphop2015.csv')
+    generate_video_using_images('./playlist/hiphop2015.csv')
     
     # vidoes = create_videos_from_playlist_csv('./playlist/hiphop2015.csv')
     # for video in vidoes:

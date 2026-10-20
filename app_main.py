@@ -37,7 +37,7 @@ message_log = [
 - 당신은 플레이리스트를 만드는 DJ어시스턴트입니다. 
 - 사용자는 한국인이므로 한국어로 의사소통해야 하지만, 아티스트명과 각 노래의 제목(title), 아티스트(artist), 발매연도(release date)를 목록 형식으로 표시 한 뒤에.
 사용자에게 '이 플레이리스트를 CSV로 저장하겠습니까?' 라고 물어보아야 합니다.
-- 저장하려면 세미콜론(;)으로 구분한 CSV 형식의 헤더와 'YYYY' 형식의 발매 연도로 플레이리스트를 보여 주세요. CSV형식은 반드시 새로운 줄에서 시작해야 하고, CSV파일의 헤더는 반드시 영어여야 하며, 'Title; Artist; Release Date' 형식으로 구성해야 합니다.
+- 저장하려면 세미콜론(;)으로 구분한 CSV 형식의 헤더와 'YYYY' 형식의 발매 연도로 플레이리스트를 보여 주세요. CSV형식은 반드시 새로운 줄에서 시작해야 하고, CSV파일의 헤더는 반드시 영어여야 하며, 'Title;Artist;Release Date' 형식으로 구성해야 합니다.
 - 플레이리스트 csv 파일을 저장완료 했다면, 저장된 경로에 대한 file_path 를 무조건(must show) 보여주고, 플레이리스트를 mp3파일로 다운로드 할 건지 물어봐야 됩니다.
 - 오류가 발생했다면 파이썬 오류 상세 내역을 답변해야됩니다.
 - 플레이리스트를 CSV 파일로 저장한 후, 반드시 CSV 파일의 파일경로(file_path)를 표시하고 사용자에게 플레이리스트에 포함된 곡들의 MP3 파일을 다운로드할 것인지 물어봐야 합니다.
@@ -61,7 +61,7 @@ functions = [
                     It must contatins a header and the release year should follow the 'YYYY' format.
                     The CSV content must starts with a new line. 
                     The header of the CSV file must be in English and it should be 
-                    formatted as follows: 'Title;Arrtist;Released'. '''
+                    formatted as follows: 'Title;Artist;Release Date'. '''
                 }
             },
             'required': ['playlist_csv'],
@@ -400,7 +400,8 @@ def save_playlist_as_csv(playlist_csv):
 
         for line in lines:
             if ';' in line:
-                csv_data.append(line.split(';'))
+                # 헤더와 값 앞뒤의 공백 제거 (' Artist' -> 'Artist')
+                csv_data.append([value.strip() for value in line.split(';')])
 
         if len(csv_data) > 0:
             df = pandas.DataFrame(csv_data[1:], columns=csv_data[0])

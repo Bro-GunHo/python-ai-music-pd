@@ -25,6 +25,7 @@ env/
 mp3/*
 images/*
 videos/*
+playlist/*__emp.csv
 
 # AI model / cache
 models/

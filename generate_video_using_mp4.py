@@ -78,7 +78,7 @@ def combine_videos_and_music(mp3_files, video_files, titles, artists, output_fil
 
 def generate_video_using_mp4(csv_file, video_filess):
     df_playlist = pd.read_csv(csv_file, sep=';', encoding='utf-8')
-    df_playlist = df_playlist.loc[df_playlist['mp3'] != 'Nout found']
+    df_playlist = df_playlist.loc[df_playlist['mp3'] != 'Not found']
     df_playlist.reset_index(inplace=True)
     df_playlist.drop(columns=['index'], inplace=True)
     mp3_files = df_playlist['mp3']

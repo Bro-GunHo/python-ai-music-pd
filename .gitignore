@@ -25,7 +25,6 @@ env/
 mp3/*
 images/*
 videos/*
-playlist/*
 
 # AI model / cache
 models/
@@ -36,8 +35,6 @@ huggingface/
 # README에 사용할 이미지 파일은 허용
 #!videos/hiphop2015.mp4
 #!videos/newyork.mp4
-#!playlist/hiphop2015.csv
-!playlist/newyork.csv
 #!images/See You Again_Wiz Khalifa ft. Charlie Puth_album_art.jpg.jpg
 !images/New York City_The Chainsmokers_album_art.jpg
 !images/Welcome to New York_Taylor Swift_album_art.jpg
